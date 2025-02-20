@@ -1,9 +1,3 @@
-# TODO:
-# Alle fkts die ersetzt werden sollen als Param übergeben
-# Param welche Error gemacht werden
-# Nicht beim laden ersetzen sondern per install_faulty
-# Nicht nur wahrscheinlichkeit sondern auch Counter erlauben bis zur Failure, auch Modulo Counter
-
 import builtins
 import random
 import functools
