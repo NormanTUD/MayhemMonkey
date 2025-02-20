@@ -304,3 +304,15 @@ class MayhemMonkey:
                 functions_list = "`" + ("`, `".join(sorted(functions))) + "`"
                 markdown += f"| {category} | {functions_list} |\n"
         return markdown
+
+    def generate_function_errors_markdown_table(self):
+        markdown = ""
+        if self.FUNCTION_ERRORS:
+            markdown = "| Function | Errors |\n| --- | --- |\n"
+            for function, errors in sorted(self.FUNCTION_ERRORS.items()):
+                if errors:
+                    error_list = "<br>".join(f"`{err_type.__name__}: {message}`" for err_type, message in errors)
+                else:
+                    error_list = "`None`"
+                markdown += f"| `{function}` | {error_list} |\n"
+        return markdown

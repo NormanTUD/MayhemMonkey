@@ -69,29 +69,76 @@ MayhemMonkey allows you to configure the error probability for various functions
 
 MayhemMonkey can generate specific types of errors for each function. Here’s a list of the possible errors and their meanings:
 
-| Function | Error Type         | Description                                      |
-|----------|--------------------|--------------------------------------------------|
-| `open`   | `FileNotFoundError` | File not found                                  |
-|          | `PermissionError`   | No permission for the file                      |
-|          | `OSError`           | Too many open files                             |
-| `input`  | `EOFError`          | End of file reached                             |
-|          | `KeyboardInterrupt` | Input was interrupted                           |
-| `print`  | `OSError`           | Error during printing                           |
-| `eval`   | `SyntaxError`       | Invalid syntax                                  |
-|          | `TypeError`         | Invalid expression                              |
-|          | `RuntimeError`      | Unexpected runtime error                        |
-| `exec`   | `SyntaxError`       | Invalid syntax                                  |
-|          | `RuntimeError`      | Unexpected runtime error                        |
-| `compile`| `SyntaxError`       | Error during compilation                        |
-| `max`    | `ValueError`        | Empty sequence                                  |
-|          | `TypeError`         | Incompatible types for comparison               |
-| `min`    | `ValueError`        | Empty sequence                                  |
-|          | `TypeError`         | Incompatible types for comparison               |
-| `divmod` | `ZeroDivisionError` | Division by zero                                |
-|          | `TypeError`         | Invalid operand                                 |
-| `pow`    | `ZeroDivisionError` | 0.0 cannot be raised to a negative exponent     |
-|          | `TypeError`         | Invalid operand                                 |
-| `round`  | `TypeError`         | Second argument must be an integer              |
+| Function | Errors |
+| --- | --- |
+| `__import__` | `ImportError: Module not found`<br>`TypeError: Invalid module name` |
+| `abs` | `TypeError: Bad operand type for abs()` |
+| `all` | `TypeError: Argument must be iterable` |
+| `any` | `TypeError: Argument must be iterable` |
+| `ascii` | `None` |
+| `bin` | `TypeError: Object cannot be interpreted as an integer` |
+| `bool` | `None` |
+| `breakpoint` | `RuntimeError: Cannot start debugger` |
+| `bytearray` | `TypeError: Invalid argument type`<br>`ValueError: Negative size not allowed` |
+| `bytes` | `TypeError: Invalid argument type`<br>`ValueError: Negative size not allowed` |
+| `callable` | `None` |
+| `chr` | `ValueError: Argument out of range`<br>`TypeError: Integer argument required` |
+| `classmethod` | `TypeError: Invalid method reference` |
+| `compile` | `SyntaxError: Compilation error`<br>`TypeError: Invalid code object` |
+| `complex` | `ValueError: Could not convert string to complex`<br>`TypeError: Invalid type for complex()` |
+| `delattr` | `AttributeError: Object has no such attribute`<br>`TypeError: Invalid attribute name` |
+| `dict` | `TypeError: Invalid dictionary construction` |
+| `dir` | `TypeError: Invalid argument type` |
+| `divmod` | `ZeroDivisionError: division by zero`<br>`TypeError: Unsupported operand type` |
+| `enumerate` | `TypeError: Object is not iterable` |
+| `eval` | `SyntaxError: Invalid syntax`<br>`TypeError: Expression not allowed`<br>`RuntimeError: Unexpected runtime error` |
+| `exec` | `SyntaxError: Invalid syntax`<br>`RuntimeError: Unexpected runtime error` |
+| `filter` | `TypeError: Function must be callable` |
+| `float` | `ValueError: Could not convert string to float`<br>`TypeError: Invalid type for float()` |
+| `format` | `ValueError: Invalid format string` |
+| `frozenset` | `TypeError: Invalid argument type` |
+| `getattr` | `AttributeError: Object has no such attribute`<br>`TypeError: Invalid attribute name` |
+| `globals` | `None` |
+| `hasattr` | `None` |
+| `hash` | `TypeError: Unhashable type` |
+| `hex` | `TypeError: Object cannot be interpreted as an integer` |
+| `id` | `None` |
+| `input` | `EOFError: End of file reached`<br>`KeyboardInterrupt: Input interrupted` |
+| `int` | `ValueError: Invalid literal for int()`<br>`TypeError: Invalid type for int()` |
+| `isinstance` | `TypeError: Second argument must be a type or tuple of types` |
+| `issubclass` | `TypeError: Second argument must be a type or tuple of types` |
+| `iter` | `TypeError: Object is not iterable` |
+| `len` | `TypeError: Object has no len()` |
+| `list` | `TypeError: Invalid argument for list()` |
+| `locals` | `None` |
+| `map` | `TypeError: Function must be callable` |
+| `max` | `ValueError: Empty sequence`<br>`TypeError: Cannot compare different types` |
+| `memoryview` | `TypeError: Invalid memory buffer` |
+| `min` | `ValueError: Empty sequence`<br>`TypeError: Cannot compare different types` |
+| `next` | `StopIteration: Iterator exhausted`<br>`TypeError: Object is not an iterator` |
+| `object` | `None` |
+| `oct` | `TypeError: Object cannot be interpreted as an integer` |
+| `open` | `FileNotFoundError: No such file or directory`<br>`PermissionError: Permission denied`<br>`IsADirectoryError: Is a directory`<br>`OSError: Too many open files` |
+| `ord` | `TypeError: Argument must be a character`<br>`ValueError: Character out of range` |
+| `pow` | `ZeroDivisionError: 0.0 cannot be raised to a negative power`<br>`TypeError: Unsupported operand type` |
+| `print` | `OSError: Output error` |
+| `property` | `None` |
+| `range` | `TypeError: Invalid argument type`<br>`ValueError: Step argument must not be zero` |
+| `repr` | `None` |
+| `reversed` | `TypeError: Object is not reversible` |
+| `round` | `TypeError: Second argument must be an integer` |
+| `set` | `TypeError: Invalid argument for set()` |
+| `setattr` | `AttributeError: Cannot set attribute`<br>`TypeError: Invalid attribute name` |
+| `slice` | `TypeError: Invalid slice indices` |
+| `sorted` | `TypeError: Invalid key function` |
+| `staticmethod` | `None` |
+| `str` | `TypeError: Invalid type for str()` |
+| `sum` | `TypeError: Object in iterable is not summable` |
+| `super` | `TypeError: Invalid superclass reference` |
+| `tuple` | `TypeError: Invalid argument for tuple()` |
+| `type` | `TypeError: Invalid arguments for type()` |
+| `vars` | `TypeError: Object must have __dict__ attribute` |
+| `zip` | `None` |
 
 ## Frequently Asked Questions
 How can I use MayhemMonkey in my application?
