@@ -61,13 +61,21 @@ Here, the 3rd print fails with some random error that print can give in real lif
 
 MayhemMonkey allows you to configure the error probability for various functions, function groups, or globally. The error probability is given as a decimal number between `0` and `1`, where `0` means no errors and `1` guarantees an error.
 
-#### Configuring Error Probabilities
+#### Methods of the MayhemMonkey-object
 
-| Function/Group         | Description                                                                  | Error Probability | Example                                   |
-|------------------------|------------------------------------------------------------------------------|-------------------|-------------------------------------------|
-| **Individual Functions**| Set error probability for a specific function.                               | Float 0 to 1            | `mayhemmonkey.set_function_error_rate("open", 0.5)` |
-| **Function Groups**     | Set error probability for a group of functions.                              | Float 0 to 1            | `mayhemmonkey.set_function_group_error_rate("io", 0.3)` |
-| **Global**              | Set global error probability for all functions.                              | Float 0 to 1            | `mayhemmonkey.set_global_error_rate(0.2)`  |
+| Function                          | Description                                                                                                   | Parameters                                                                                 |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| `get_function_categories`         | Returns a dictionary of all function categories and their respective functions.                               | No parameters.                                                                             |
+| `get_function_categories_as_list` | Returns a list of tuples where each tuple contains the category name and its associated functions.            | No parameters.                                                                             |
+| `install_faulty`                  | Patches built-in functions to introduce errors. Can only be called once.                                      | No parameters.                                                                             |
+| `set_function_error_rate`         | Sets the error probability for an individual function.                                                        | `name` (str): The function name.<br>`rate` (float): The error rate between 0 and 1.        |
+| `set_function_group_error_rate`   | Sets the error probability for a group of functions.                                                          | `group` (str): The function group.<br>`rate` (float): The error rate between 0 and 1.      |
+| `is_valid_exception_tuple_list`   | Checks if the provided object is a valid list of tuples with exception types and messages.                    | `obj` (list): A list of tuples of the form (ExceptionType, String).                        |
+| `add_exception_to_function`       | Adds a list of exceptions (tuples) to a function to simulate specific errors.                                 | `name` (str): The function name.<br>`list_of_tuples_of_exceptions` (list): List of tuples (ExceptionType, String). |
+| `set_function_fail_after_count`   | Sets the count after which a function will start failing with errors.                                         | `name` (str): The function name.<br>`cnt` (int): The count after which it will fail.       |
+| `generate_function_categories_markdown_table` | Generates a markdown table for function categories and their functions.                                      | No parameters.                                                                             |
+| `generate_function_errors_markdown_table`      | Generates a markdown table for functions and their associated errors.                                         | No parameters.                                                                             |
+
 
 #### Function Groups and Their Functions
 
