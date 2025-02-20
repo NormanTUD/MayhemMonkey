@@ -176,7 +176,3 @@ When an error occurs due to the configured error probability, an exception will 
 ## Contributing
 
 If you want to contribute to the development of MayhemMonkey, you can open a pull request or file an issue on GitHub.
-
-# Caveats
-
-Load this as last module, as currently, all imports will fail when this module is loaded.
