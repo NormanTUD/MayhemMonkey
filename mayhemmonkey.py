@@ -5,39 +5,152 @@ import types
 
 class MayhemMonkey:
     FUNCTION_CATEGORIES = {
-        "io": {"open", "input", "print"},
-        "math": {"divmod", "max", "min", "pow", "round"},
-        "evaluation": {"eval", "exec", "compile"}
+        "io": {
+            "open", "input", "print"
+        },
+        "math": {
+            "abs", "divmod", "max", "min", "pow", "round", 
+            "sum"
+        },
+        "evaluation": {
+            "eval", "exec", "compile"
+        },
+        "conversion": {
+            "ascii", "bin", "bool", "bytearray", "bytes", 
+            "chr", "complex", "float", "format", "hex", 
+            "int", "oct", "ord", "repr", "str"
+        },
+        "collections": {
+            "dict", "frozenset", "list", "set", "tuple"
+        },
+        "iteration": {
+            "all", "any", "enumerate", "filter", "iter", 
+            "len", "map", "next", "range", "reversed", 
+            "sorted", "zip"
+        },
+        "attributes": {
+            "delattr", "getattr", "hasattr", "setattr", 
+            "property"
+        },
+        "reflection": {
+            "callable", "globals", "id", "isinstance", 
+            "issubclass", "locals", "type", "vars", 
+            "__import__"
+        },
+        "functional": {
+            "breakpoint", "classmethod", "staticmethod", 
+            "super"
+        },
+        "hashing": {
+            "hash"
+        },
+        "slicing": {
+            "slice"
+        },
+        "exceptions": {
+            "compile", "eval", "exec"
+        }
     }
+
 
     DEFAULT_GLOBAL_ERROR_RATE = 0
     DEFAULT_INDIVIDUAL_ERROR_RATES = {}
     DEFAULT_GROUP_ERROR_RATES = {}
 
     FUNCTION_ERRORS = {
-        "open": [(FileNotFoundError, "No such file or directory"),
-                 (PermissionError, "Permission denied"),
-                 (IsADirectoryError, "Is a directory"),
-                 (OSError, "Too many open files")],
-        "input": [(EOFError, "End of file reached"),
-                  (KeyboardInterrupt, "Input interrupted")],
-        "print": [(OSError, "Output error")],
+        "abs": [(TypeError, "Bad operand type for abs()")],
+        "all": [(TypeError, "Argument must be iterable")],
+        "any": [(TypeError, "Argument must be iterable")],
+        "ascii": [],
+        "bin": [(TypeError, "Object cannot be interpreted as an integer")],
+        "bool": [],
+        "breakpoint": [(RuntimeError, "Cannot start debugger")],
+        "bytearray": [(TypeError, "Invalid argument type"),
+                      (ValueError, "Negative size not allowed")],
+        "bytes": [(TypeError, "Invalid argument type"),
+                  (ValueError, "Negative size not allowed")],
+        "callable": [],
+        "chr": [(ValueError, "Argument out of range"),
+                (TypeError, "Integer argument required")],
+        "classmethod": [(TypeError, "Invalid method reference")],
+        "compile": [(SyntaxError, "Compilation error"),
+                    (TypeError, "Invalid code object")],
+        "complex": [(ValueError, "Could not convert string to complex"),
+                    (TypeError, "Invalid type for complex()")],
+        "delattr": [(AttributeError, "Object has no such attribute"),
+                    (TypeError, "Invalid attribute name")],
+        "dict": [(TypeError, "Invalid dictionary construction")],
+        "dir": [(TypeError, "Invalid argument type")],
+        "divmod": [(ZeroDivisionError, "division by zero"),
+                   (TypeError, "Unsupported operand type")],
+        "enumerate": [(TypeError, "Object is not iterable")],
         "eval": [(SyntaxError, "Invalid syntax"),
                  (TypeError, "Expression not allowed"),
                  (RuntimeError, "Unexpected runtime error")],
         "exec": [(SyntaxError, "Invalid syntax"),
                  (RuntimeError, "Unexpected runtime error")],
-        "compile": [(SyntaxError, "Compilation error")],
+        "filter": [(TypeError, "Function must be callable")],
+        "float": [(ValueError, "Could not convert string to float"),
+                  (TypeError, "Invalid type for float()")],
+        "format": [(ValueError, "Invalid format string")],
+        "frozenset": [(TypeError, "Invalid argument type")],
+        "getattr": [(AttributeError, "Object has no such attribute"),
+                    (TypeError, "Invalid attribute name")],
+        "globals": [],
+        "hasattr": [],
         "hash": [(TypeError, "Unhashable type")],
+        "hex": [(TypeError, "Object cannot be interpreted as an integer")],
+        "id": [],
+        "input": [(EOFError, "End of file reached"),
+                  (KeyboardInterrupt, "Input interrupted")],
+        "int": [(ValueError, "Invalid literal for int()"),
+                (TypeError, "Invalid type for int()")],
+        "isinstance": [(TypeError, "Second argument must be a type or tuple of types")],
+        "issubclass": [(TypeError, "Second argument must be a type or tuple of types")],
+        "iter": [(TypeError, "Object is not iterable")],
+        "len": [(TypeError, "Object has no len()")],
+        "list": [(TypeError, "Invalid argument for list()")],
+        "locals": [],
+        "map": [(TypeError, "Function must be callable")],
         "max": [(ValueError, "Empty sequence"),
                 (TypeError, "Cannot compare different types")],
+        "memoryview": [(TypeError, "Invalid memory buffer")],
         "min": [(ValueError, "Empty sequence"),
                 (TypeError, "Cannot compare different types")],
-        "divmod": [(ZeroDivisionError, "division by zero"),
-                   (TypeError, "Unsupported operand type")],
+        "next": [(StopIteration, "Iterator exhausted"),
+                 (TypeError, "Object is not an iterator")],
+        "object": [],
+        "oct": [(TypeError, "Object cannot be interpreted as an integer")],
+        "open": [(FileNotFoundError, "No such file or directory"),
+                 (PermissionError, "Permission denied"),
+                 (IsADirectoryError, "Is a directory"),
+                 (OSError, "Too many open files")],
+        "ord": [(TypeError, "Argument must be a character"),
+                (ValueError, "Character out of range")],
         "pow": [(ZeroDivisionError, "0.0 cannot be raised to a negative power"),
                 (TypeError, "Unsupported operand type")],
+        "print": [(OSError, "Output error")],
+        "property": [],
+        "range": [(TypeError, "Invalid argument type"),
+                  (ValueError, "Step argument must not be zero")],
+        "repr": [],
+        "reversed": [(TypeError, "Object is not reversible")],
         "round": [(TypeError, "Second argument must be an integer")],
+        "set": [(TypeError, "Invalid argument for set()")],
+        "setattr": [(AttributeError, "Cannot set attribute"),
+                    (TypeError, "Invalid attribute name")],
+        "slice": [(TypeError, "Invalid slice indices")],
+        "sorted": [(TypeError, "Invalid key function")],
+        "staticmethod": [],
+        "str": [(TypeError, "Invalid type for str()")],
+        "sum": [(TypeError, "Object in iterable is not summable")],
+        "super": [(TypeError, "Invalid superclass reference")],
+        "tuple": [(TypeError, "Invalid argument for tuple()")],
+        "type": [(TypeError, "Invalid arguments for type()")],
+        "vars": [(TypeError, "Object must have __dict__ attribute")],
+        "zip": [],
+        "__import__": [(ImportError, "Module not found"),
+                       (TypeError, "Invalid module name")]
     }
 
     FUNCTION_CALL_COUNTER = {}
