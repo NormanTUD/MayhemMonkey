@@ -50,13 +50,20 @@ MayhemMonkey allows you to configure the error probability for various functions
 
 #### Function Groups and Their Functions
 
-| Error Group   | Functions                                   |
-|---------------|---------------------------------------------|
-| **io**         | `open`, `input`, `print`                    |
-| **math**       | `abs`, `divmod`, `max`, `min`, `pow`, `round`|
-| **conversion** | `ascii`, `bin`, `chr`, `hex`, `oct`, `ord`, `repr` |
-| **iteration**  | `aiter`, `anext`, `iter`, `next`           |
-| **evaluation** | `eval`, `exec`, `compile`                  |
+| Category | Functions |
+| --- | --- |
+| attributes | `delattr`, `getattr`, `hasattr`, `property`, `setattr` |
+| collections | `dict`, `frozenset`, `list`, `set`, `tuple` |
+| conversion | `ascii`, `bin`, `bool`, `bytearray`, `bytes`, `chr`, `complex`, `float`, `format`, `hex`, `int`, `oct`, `ord`, `repr`, `str` |
+| evaluation | `compile`, `eval`, `exec` |
+| exceptions | `compile`, `eval`, `exec` |
+| functional | `breakpoint`, `classmethod`, `staticmethod`, `super` |
+| hashing | `hash` |
+| io | `input`, `open`, `print` |
+| iteration | `all`, `any`, `enumerate`, `filter`, `iter`, `len`, `map`, `next`, `range`, `reversed`, `sorted`, `zip` |
+| math | `abs`, `divmod`, `max`, `min`, `pow`, `round`, `sum` |
+| reflection | `__import__`, `callable`, `globals`, `id`, `isinstance`, `issubclass`, `locals`, `type`, `vars` |
+| slicing | `slice` |
 
 #### Error Types for Functions
 

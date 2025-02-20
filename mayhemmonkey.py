@@ -295,3 +295,12 @@ class MayhemMonkey:
                 raise ValueError(f"{name} is not a builtin function")
         else:
             raise ValueError(f"1st parameter name must be a string, is {type(name)}")
+
+    def generate_function_categories_markdown_table(self):
+        markdown = ""
+        if self.FUNCTION_CATEGORIES.items():
+            markdown = "| Category | Functions |\n| --- | --- |\n"
+            for category, functions in sorted(self.FUNCTION_CATEGORIES.items()):
+                functions_list = "`" + ("`, `".join(sorted(functions))) + "`"
+                markdown += f"| {category} | {functions_list} |\n"
+        return markdown
