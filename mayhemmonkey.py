@@ -147,7 +147,7 @@ class MayhemMonkey:
         "tuple": [(TypeError, "Invalid argument for tuple()")],
         "type": [(TypeError, "Invalid arguments for type()")],
         "vars": [(TypeError, "Object must have __dict__ attribute")],
-        "zip": [],
+        "zip": [(TypeError, "'NoneType' object is not iterable")],
         "__import__": [(ImportError, "Module not found"),
                        (TypeError, "Invalid module name")]
     }
