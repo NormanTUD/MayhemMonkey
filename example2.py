@@ -8,4 +8,9 @@ mayhemmonkey.install_faulty()
 
 print("This should be printed.")
 print("This should be printed.")
+try:
+    print("This should be printed.")
+except Exception as e:
+    print(f"Error: {e}")
+
 print("This should be printed.")
