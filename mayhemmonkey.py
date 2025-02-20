@@ -224,6 +224,8 @@ class MayhemMonkey:
                     index = random.randint(0, max_index)
                     err_type, err_msg = errors[index]
 
+                    print(err_msg)
+
                     raise err_type(f"{err_msg}")
             return func(*args, **kwargs)
         return wrapper
