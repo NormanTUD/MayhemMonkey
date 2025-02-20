@@ -57,7 +57,7 @@ print("This should be printed.")
 
 Here, the 3rd print fails with some random error that print can give in real life.
 
-### Error Configuration
+### Functions and configuration
 
 MayhemMonkey allows you to configure the error probability for various functions, function groups, or globally. The error probability is given as a decimal number between `0` and `1`, where `0` means no errors and `1` guarantees an error.
 
