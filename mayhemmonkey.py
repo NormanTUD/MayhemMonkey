@@ -2,6 +2,7 @@ import builtins
 import random
 import functools
 import types
+import traceback
 
 class MayhemMonkey:
     FUNCTION_CATEGORIES = {
@@ -230,6 +231,7 @@ class MayhemMonkey:
                     index = random.randint(0, max_index)
                     err_type, err_msg = errors[index]
 
+                    traceback.print_exc()
                     print(err_msg)
 
                     raise err_type(f"{err_msg}")
