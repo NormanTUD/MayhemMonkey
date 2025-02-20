@@ -64,6 +64,7 @@ class MayhemMonkey:
             and name in self.function_list
         }
 
+    def install_faulty(self):
         self._patch_functions()
 
     def get_function_categories(self):
