@@ -189,10 +189,18 @@ class MayhemMonkey:
         """Returns a list of tuples, where each tuple contains (category, [functions])."""
         return [(category, list(functions)) for category, functions in self.FUNCTION_CATEGORIES.items()]
 
+    def _function_is_in_enabled_faulty_group(self, name):
+        for func_group_name in self.group_error_rates:
+            if name in self.FUNCTION_CATEGORIES[func_group_name]:
+                return True
+
+        return False
+
     def _patch_functions(self):
         """Overrides built-in functions with faulty versions."""
         for name, func in self.originals.items():
-            setattr(builtins, name, self._faulty_wrapper(func, name))
+            if name in self.FAIL_AT_COUNT or name in self.individual_error_rates or self._function_is_in_enabled_faulty_group(name):
+                setattr(builtins, name, self._faulty_wrapper(func, name))
 
     def _faulty_wrapper(self, func, name):
         """Creates a faulty version of a function."""
