@@ -46,6 +46,10 @@ class MayhemMonkey:
         "round": [(TypeError, "Second argument must be an integer")],
     }
 
+    FUNCTION_CALL_COUNTER = {}
+
+    FAIL_AT_COUNT = {}
+
     def __init__(self):
         self.global_error_rate = self.DEFAULT_GLOBAL_ERROR_RATE
         self.individual_error_rates = self.DEFAULT_INDIVIDUAL_ERROR_RATES.copy()
@@ -79,9 +83,21 @@ class MayhemMonkey:
         """Creates a faulty version of a function."""
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
+            self.FUNCTION_CALL_COUNTER[name] = self.FUNCTION_CALL_COUNTER.get(name, 0) + 1
+
             error_rate = self.get_error_rate(name)
-            if random.random() < error_rate:
+
+            try_to_fail = False
+
+            if name in self.FAIL_AT_COUNT and name in self.FUNCTION_CALL_COUNTER and self.FAIL_AT_COUNT[name] == self.FUNCTION_CALL_COUNTER[name]:
+                try_to_fail = True
+
+            elif random.random() < error_rate:
+                try_to_fail = True
+
+            if try_to_fail:
                 errors = self.FUNCTION_ERRORS.get(name, [(RuntimeError, "Unexpected runtime error")])
+
                 if errors:
                     len_errors = 0
                     for _ in errors:
@@ -124,3 +140,12 @@ class MayhemMonkey:
         if not (0 <= rate <= 1):
             raise ValueError("Error probability must be between 0 and 1")
         self.global_error_rate = rate
+
+    def set_function_fail_after_count(self, name, cnt):
+        if isinstance(name, str):
+            if isinstance(cnt, int):
+                self.FAIL_AT_COUNT[name] = cnt
+            else:
+                raise ValueError(f"2nd parameter cnt must be a string, is {type(cnt)}")
+        else:
+            raise ValueError(f"1st parameter name must be a string, is {type(name)}")
