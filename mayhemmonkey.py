@@ -148,10 +148,47 @@ class MayhemMonkey:
             raise ValueError("Error probability must be between 0 and 1")
         self.global_error_rate = rate
 
+    def is_valid_exception_tuple_list(self, obj):
+        """
+        Checks if the given object is a list of tuples of the form (ExceptionType, String).
+        Raises a TypeError if the object is not valid.
+        """
+        if not isinstance(obj, list):
+            raise TypeError(f"Expected a list, but got {type(obj).__name__}")
+
+        for i, item in enumerate(obj):
+            if not isinstance(item, tuple) or len(item) != 2:
+                raise TypeError(f"Item {i} is not a tuple of length 2: {item}")
+
+            exc_type, msg = item
+
+            if not (isinstance(exc_type, type) and issubclass(exc_type, BaseException)):
+                raise TypeError(f"Item {i} first element is not an Exception type: {exc_type}")
+
+            if not isinstance(msg, str):
+                raise TypeError(f"Item {i} second element is not a string: {msg}")
+
+        return True
+
+    def add_exception_to_function(self, name, list_of_tuples_of_exceptions):
+        if isinstance(name, str):
+            if self.is_valid_exception_tuple_list(list_of_tuples_of_exceptions):
+                if name in self.FUNCTION_ERRORS:
+                    print(f"Warning: {name} already exists in self.FUNCTION_ERRORS. Old value will be overwritten.")
+
+                self.FUNCTION_ERRORS[name] = list_of_tuples_of_exceptions
+            else:
+                raise ValueError(f"2nd parameter list_of_tuples_of_exceptions must be a list of tuples")
+        else:
+            raise ValueError(f"1st parameter name must be a string, is {type(name)}")
+
     def set_function_fail_after_count(self, name, cnt):
         if isinstance(name, str):
             if isinstance(cnt, int):
-                self.FAIL_AT_COUNT[name] = cnt
+                if name in self.FUNCTION_ERRORS:
+                    self.FAIL_AT_COUNT[name] = cnt
+                else:
+                    raise ValueError(f"Function has no known exceptions. Call 'mayhemmonkey.add_exception_to_function(\"{name}\", [(OSError, 'Output Error')])' with a list of tuples of exceptions and their corresponding names BEFORE calling set_function_fail_after_count.")
             else:
                 raise ValueError(f"2nd parameter cnt must be a string, is {type(cnt)}")
         else:
