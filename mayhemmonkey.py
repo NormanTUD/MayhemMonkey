@@ -60,6 +60,10 @@ class MayhemMonkey:
             and name in self.function_list
         }
 
+    def is_builtin_function(self, func_name):
+        """ Check if a function is a builtin """
+        return hasattr(builtins, func_name) and callable(getattr(builtins, func_name))
+
     def install_faulty(self):
         if self.INSTALLED_FAULTY:
             raise Exception("Can only call install_faulty once.")
@@ -166,24 +170,30 @@ class MayhemMonkey:
 
     def add_exception_to_function(self, name, list_of_tuples_of_exceptions):
         if isinstance(name, str):
-            if self.is_valid_exception_tuple_list(list_of_tuples_of_exceptions):
-                if name in self.FUNCTION_ERRORS:
-                    print(f"Warning: {name} already exists in self.FUNCTION_ERRORS. Old value will be overwritten.")
+            if self.is_builtin_function(name):
+                if self.is_valid_exception_tuple_list(list_of_tuples_of_exceptions):
+                    if name in self.FUNCTION_ERRORS:
+                        print(f"Warning: {name} already exists in self.FUNCTION_ERRORS. Old value will be overwritten.")
 
-                self.FUNCTION_ERRORS[name] = list_of_tuples_of_exceptions
+                    self.FUNCTION_ERRORS[name] = list_of_tuples_of_exceptions
+                else:
+                    raise ValueError(f"2nd parameter list_of_tuples_of_exceptions must be a list of tuples")
             else:
-                raise ValueError(f"2nd parameter list_of_tuples_of_exceptions must be a list of tuples")
+                raise ValueError(f"{name} is not a builtin function")
         else:
             raise ValueError(f"1st parameter name must be a string, is {type(name)}")
 
     def set_function_fail_after_count(self, name, cnt):
         if isinstance(name, str):
-            if isinstance(cnt, int):
-                if name in self.FUNCTION_ERRORS:
-                    self.FAIL_AT_COUNT[name] = cnt
+            if self.is_builtin_function(name):
+                if isinstance(cnt, int):
+                    if name in self.FUNCTION_ERRORS:
+                        self.FAIL_AT_COUNT[name] = cnt
+                    else:
+                        raise ValueError(f"Function has no known exceptions. Call 'mayhemmonkey.add_exception_to_function(\"{name}\", [(OSError, 'Output Error')])' with a list of tuples of exceptions and their corresponding names BEFORE calling set_function_fail_after_count.")
                 else:
-                    raise ValueError(f"Function has no known exceptions. Call 'mayhemmonkey.add_exception_to_function(\"{name}\", [(OSError, 'Output Error')])' with a list of tuples of exceptions and their corresponding names BEFORE calling set_function_fail_after_count.")
+                    raise ValueError(f"2nd parameter cnt must be a string, is {type(cnt)}")
             else:
-                raise ValueError(f"2nd parameter cnt must be a string, is {type(cnt)}")
+                raise ValueError(f"{name} is not a builtin function")
         else:
             raise ValueError(f"1st parameter name must be a string, is {type(name)}")
