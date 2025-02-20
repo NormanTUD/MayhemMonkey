@@ -169,11 +169,6 @@ MayhemMonkey can generate specific types of errors for each function. Here’s a
 | `vars` | `TypeError: Object must have __dict__ attribute` |
 | `zip` | `None` |
 
-## Frequently Asked Questions
-How can I use MayhemMonkey in my application?
-
-MayhemMonkey is easy to use to simulate errors in basic Python functions. You can install mayhemmonkey in your project and then configure error probabilities for specific functions, function groups, or globally. This helps ensure that your application is robust enough to handle different error conditions.
-
 ## What happens if an error occurs?
 
 When an error occurs due to the configured error probability, an exception will be raised that you can handle with a try-except block. You can ensure that your application is prepared for these errors by adding appropriate error handling.
