@@ -7,8 +7,6 @@ mayhemmonkey.set_function_fail_after_count("print", 3)
 def print_ASDF(name):
     print(name)
 
-mayhemmonkey.set_function_fail_after_count("print_ASDF", 3)
-
 mayhemmonkey.install_faulty()
 
 print("This should be printed.")
