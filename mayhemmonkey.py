@@ -253,7 +253,7 @@ class MayhemMonkey:
             for g in name:
                 self._set_function_error_rate(g, rate)
 
-        elif isinstance(name, list):
+        elif isinstance(name, str):
             self._set_function_error_rate(name, rate)
 
         else:
@@ -274,7 +274,7 @@ class MayhemMonkey:
             for g in group:
                 self._set_function_group_error_rate(g, rate)
 
-        elif isinstance(group, list):
+        elif isinstance(group, str):
             self._set_function_group_error_rate(group, rate)
 
         else:
