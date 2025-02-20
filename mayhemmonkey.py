@@ -171,7 +171,7 @@ class MayhemMonkey:
             and name in self.function_list
         }
 
-    def is_builtin_function(self, func_name):
+    def _is_builtin_function(self, func_name):
         """ Check if a function is a builtin """
         return hasattr(builtins, func_name) and callable(getattr(builtins, func_name))
 
@@ -267,8 +267,9 @@ class MayhemMonkey:
         return True
 
     def add_exception_to_function(self, name, list_of_tuples_of_exceptions):
+        """ Adds a list of tuples (ExceptionClass, Description) of exceptions to the possible exceptions """
         if isinstance(name, str):
-            if self.is_builtin_function(name):
+            if self._is_builtin_function(name):
                 if self.is_valid_exception_tuple_list(list_of_tuples_of_exceptions):
                     if name in self.FUNCTION_ERRORS:
                         print(f"Warning: {name} already exists in self.FUNCTION_ERRORS. Old value will be overwritten.")
@@ -283,7 +284,7 @@ class MayhemMonkey:
 
     def set_function_fail_after_count(self, name, cnt):
         if isinstance(name, str):
-            if self.is_builtin_function(name):
+            if self._is_builtin_function(name):
                 if isinstance(cnt, int):
                     if name in self.FUNCTION_ERRORS:
                         self.FAIL_AT_COUNT[name] = cnt
