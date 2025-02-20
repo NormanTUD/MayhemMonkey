@@ -4,9 +4,6 @@ mayhemmonkey = MayhemMonkey()
 
 mayhemmonkey.set_function_fail_after_count("print", 3)
 
-def print_ASDF(name):
-    print(name)
-
 mayhemmonkey.install_faulty()
 
 print("This should be printed.")
@@ -17,9 +14,3 @@ except Exception as e:
     print(f"Error: {e}")
 
 print("This should be printed.")
-
-print_ASDF("hallo")
-print_ASDF("hallo")
-print_ASDF("hallo")
-print_ASDF("hallo")
-print_ASDF("hallo")

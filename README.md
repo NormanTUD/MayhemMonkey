@@ -34,6 +34,29 @@ with open("test.txt", "w") as f:  # 50% Chance that it'll fail
 print("This should be printed.")  # 30% it'll fail because it's in the group "io"
 ```
 
+You can also set specific functions to fail after a certain amount of calls:
+
+```
+from mayhemmonkey import MayhemMonkey
+
+mayhemmonkey = MayhemMonkey()
+
+mayhemmonkey.set_function_fail_after_count("print", 3)
+
+mayhemmonkey.install_faulty()
+
+print("This should be printed.")
+print("This should be printed.")
+try:
+    print("This shouldn't be printed.")
+except Exception as e:
+    print(f"Error: {e}")
+
+print("This should be printed.")
+```
+
+Here, the 3rd print fails with some random error that print can give in real life.
+
 ### Error Configuration
 
 MayhemMonkey allows you to configure the error probability for various functions, function groups, or globally. The error probability is given as a decimal number between `0` and `1`, where `0` means no errors and `1` guarantees an error.
