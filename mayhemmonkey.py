@@ -201,7 +201,7 @@ class MayhemMonkey:
         def wrapper(*args, **kwargs):
             self.FUNCTION_CALL_COUNTER[name] = self.FUNCTION_CALL_COUNTER.get(name, 0) + 1
 
-            error_rate = self.get_error_rate(name)
+            error_rate = self.individual_error_rates.get(name, 0)
 
             try_to_fail = False
 
