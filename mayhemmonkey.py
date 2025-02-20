@@ -238,7 +238,7 @@ class MayhemMonkey:
             return func(*args, **kwargs)
         return wrapper
 
-    def set_function_error_rate(self, name, rate):
+    def _set_function_error_rate(self, name, rate):
         """Sets the error probability for an individual function."""
         if name not in self.originals:
             raise ValueError(f"Unknown function: {name}")
@@ -246,13 +246,40 @@ class MayhemMonkey:
             raise ValueError("Error probability must be between 0 and 1")
         self.individual_error_rates[name] = rate
 
-    def set_function_group_error_rate(self, group, rate):
+    def set_function_error_rate(self, name, rate):
+        """Sets the error probability for an individual function."""
+
+        if isinstance(name, list):
+            for g in name:
+                self._set_function_error_rate(g, rate)
+
+        elif isinstance(name, list):
+            self._set_function_error_rate(name, rate)
+
+        else:
+            raise ValueError("Name must be either a string or a list, is {type(name)}")
+
+    def _set_function_group_error_rate(self, group, rate):
         """Sets the error probability for a function group."""
         if group not in self.FUNCTION_CATEGORIES:
             raise ValueError(f"Unknown function group: {group}")
         if not (0 <= rate <= 1):
             raise ValueError("Error probability must be between 0 and 1")
         self.group_error_rates[group] = rate
+
+    def set_function_group_error_rate(self, group, rate):
+        """Sets the error probability for a function group."""
+
+        if isinstance(group, list):
+            for g in group:
+                self._set_function_group_error_rate(g, rate)
+
+        elif isinstance(group, list):
+            self._set_function_group_error_rate(group, rate)
+
+        else:
+            raise ValueError("Group must be either a string or a list, is {type(group)}")
+
 
     def is_valid_exception_tuple_list(self, obj):
         """

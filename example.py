@@ -4,6 +4,7 @@ mayhemmonkey = MayhemMonkey()
 
 mayhemmonkey.set_function_error_rate("open", 0.5)
 mayhemmonkey.set_function_group_error_rate("io", 0.3)
+mayhemmonkey.set_function_group_error_rate(["math", "conversion"], 0.8)
 
 mayhemmonkey.install_faulty()
 
