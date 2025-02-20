@@ -1,0 +1,4 @@
+test.txt
+__pycache__/
+build/
+mayhemmonkey.egg-info/

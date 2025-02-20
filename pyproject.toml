@@ -1,0 +1,17 @@
+[project]
+name = "mayhemmonkey"
+description = "A tool for testing what happens if base functions of python except"
+authors = [
+  {email = "norman.koch@tu-dresden.de"},
+  {name = "Norman Koch"}
+]
+version = "2025.02.20-1"
+
+readme = "README.md"
+dynamic = ["dependencies"]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt", "test_requirements.txt"]}
