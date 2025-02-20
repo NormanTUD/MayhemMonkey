@@ -52,7 +52,6 @@ class MayhemMonkey:
         }
     }
 
-
     DEFAULT_INDIVIDUAL_ERROR_RATES = {}
     DEFAULT_GROUP_ERROR_RATES = {}
 
