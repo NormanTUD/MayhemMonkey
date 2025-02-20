@@ -209,15 +209,15 @@ class MayhemMonkey:
         def wrapper(*args, **kwargs):
             self.FUNCTION_CALL_COUNTER[name] = self.FUNCTION_CALL_COUNTER.get(name, 0) + 1
 
-            error_rate = self.individual_error_rates.get(name, 0)
+            individual_function_error_rate = self.individual_error_rates.get(name, 0)
 
             try_to_fail = False
 
-            if name in self.FAIL_AT_COUNT and name in self.FUNCTION_CALL_COUNTER and self.FAIL_AT_COUNT[name] == self.FUNCTION_CALL_COUNTER[name]:
-                print(f"Failed {name} after {self.FAIL_AT_COUNT[name]} calls")
+            if individual_function_error_rate != 0 and random.random() < individual_function_error_rate:
                 try_to_fail = True
 
-            elif random.random() < error_rate:
+            elif name in self.FAIL_AT_COUNT and name in self.FUNCTION_CALL_COUNTER and self.FAIL_AT_COUNT[name] == self.FUNCTION_CALL_COUNTER[name]:
+                print(f"Failed {name} after {self.FAIL_AT_COUNT[name]} calls")
                 try_to_fail = True
 
             if try_to_fail:
