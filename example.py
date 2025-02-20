@@ -5,9 +5,8 @@ mayhemmonkey = MayhemMonkey()
 print(mayhemmonkey.get_function_categories())
 print(mayhemmonkey.get_function_categories_as_list())
 
-#mayhemmonkey.set_function_error_rate("open", 0.5)
-#mayhemmonkey.set_function_group_error_rate("io", 0.3)
-mayhemmonkey.set_global_error_rate(0.2)
+mayhemmonkey.set_function_error_rate("open", 0.5)
+mayhemmonkey.set_function_group_error_rate("io", 0.3)
 
 mayhemmonkey.install_faulty()
 
