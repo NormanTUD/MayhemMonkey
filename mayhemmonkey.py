@@ -213,6 +213,7 @@ class MayhemMonkey:
             try_to_fail = False
 
             if name in self.FAIL_AT_COUNT and name in self.FUNCTION_CALL_COUNTER and self.FAIL_AT_COUNT[name] == self.FUNCTION_CALL_COUNTER[name]:
+                print(f"Failed {name} after {self.FAIL_AT_COUNT[name]} calls")
                 try_to_fail = True
 
             elif random.random() < error_rate:
