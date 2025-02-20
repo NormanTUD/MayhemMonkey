@@ -257,7 +257,7 @@ class MayhemMonkey:
             self._set_function_error_rate(name, rate)
 
         else:
-            raise ValueError("Name must be either a string or a list, is {type(name)}")
+            raise ValueError(f"Name must be either a string or a list, is {type(name)}")
 
     def _set_function_group_error_rate(self, group, rate):
         """Sets the error probability for a function group."""
@@ -278,7 +278,7 @@ class MayhemMonkey:
             self._set_function_group_error_rate(group, rate)
 
         else:
-            raise ValueError("Group must be either a string or a list, is {type(group)}")
+            raise ValueError(f"Group must be either a string or a list, is {type(group)}")
 
 
     def is_valid_exception_tuple_list(self, obj):
