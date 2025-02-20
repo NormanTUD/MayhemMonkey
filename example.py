@@ -10,9 +10,6 @@ mayhemmonkey.set_function_group_error_rate("io", 0.3)
 
 mayhemmonkey.install_faulty()
 
-#print(mayhemmonkey.generate_function_categories_markdown_table())
-print(mayhemmonkey.generate_function_errors_markdown_table())
-
 with open("test.txt", "w") as f:  # 50% Chance that it'll fail
     f.write("Hello world!")
 
