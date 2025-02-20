@@ -50,6 +50,8 @@ class MayhemMonkey:
 
     FAIL_AT_COUNT = {}
 
+    INSTALLED_FAULTY = False
+
     def __init__(self):
         self.global_error_rate = self.DEFAULT_GLOBAL_ERROR_RATE
         self.individual_error_rates = self.DEFAULT_INDIVIDUAL_ERROR_RATES.copy()
@@ -65,7 +67,11 @@ class MayhemMonkey:
         }
 
     def install_faulty(self):
+        if self.INSTALLED_FAULTY:
+            raise Exception("Can only call install_faulty once.")
+
         self._patch_functions()
+        self.INSTALLED_FAULTY = True
 
     def get_function_categories(self):
         """Returns a dictionary with all FUNCTION_CATEGORIES and their functions."""
