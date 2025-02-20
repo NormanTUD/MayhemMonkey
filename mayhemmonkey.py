@@ -53,7 +53,6 @@ class MayhemMonkey:
     }
 
 
-    DEFAULT_GLOBAL_ERROR_RATE = 0
     DEFAULT_INDIVIDUAL_ERROR_RATES = {}
     DEFAULT_GROUP_ERROR_RATES = {}
 
@@ -160,7 +159,6 @@ class MayhemMonkey:
     INSTALLED_FAULTY = False
 
     def __init__(self):
-        self.global_error_rate = self.DEFAULT_GLOBAL_ERROR_RATE
         self.individual_error_rates = self.DEFAULT_INDIVIDUAL_ERROR_RATES.copy()
         self.group_error_rates = self.DEFAULT_GROUP_ERROR_RATES.copy()
         self.function_list = [func for funcs in self.FUNCTION_CATEGORIES.values() for func in funcs]
@@ -230,15 +228,6 @@ class MayhemMonkey:
             return func(*args, **kwargs)
         return wrapper
 
-    def get_error_rate(self, name):
-        """Determines the error probability for a function."""
-        if name in self.individual_error_rates:
-            return self.individual_error_rates[name]
-        for category, functions in self.FUNCTION_CATEGORIES.items():
-            if name in functions:
-                return self.group_error_rates.get(category, self.global_error_rate)
-        return self.global_error_rate
-
     def set_function_error_rate(self, name, rate):
         """Sets the error probability for an individual function."""
         if name not in self.originals:
@@ -254,12 +243,6 @@ class MayhemMonkey:
         if not (0 <= rate <= 1):
             raise ValueError("Error probability must be between 0 and 1")
         self.group_error_rates[group] = rate
-
-    def set_global_error_rate(self, rate):
-        """Sets the global error probability."""
-        if not (0 <= rate <= 1):
-            raise ValueError("Error probability must be between 0 and 1")
-        self.global_error_rate = rate
 
     def is_valid_exception_tuple_list(self, obj):
         """
